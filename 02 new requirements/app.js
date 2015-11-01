@@ -6,7 +6,7 @@ $(document).ready(function() {
     // display names
     names.forEach(function(name, index) {
         $('#name-' + (index + 1))[0].innerHTML = name;
-    })
+    });
 
     // display count
     function displayCount(element, count) {
