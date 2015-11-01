@@ -1,5 +1,11 @@
 $(document).ready(function() {
 
+    var Cat = function(name, url) {
+        this.name = name;
+        this.url = url;
+        this.count = 0;
+    };
+
    var cats = [
         new Cat('Bella', 'cat01.jpg'),
         new Cat('Tigger', 'cat02.jpg'),
@@ -33,12 +39,12 @@ $(document).ready(function() {
                 $('#name').text(cat.name);
                 $('#cat-pic').attr('src', cat.url);
                 $('#counter').text(cat.count);
-            }
+            };
         })(cat, index));
 
         $(thumbContainer).append($div);
         thumbs.push($div);
-    })
+    });
 
     // display count
     function displayCount(element, count) {
