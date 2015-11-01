@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cat Clicker #3</title>
+    <style>
+        body {
+            font-family: Arial;
+        }
+        .thumbcontainer {
+            width: 10%;
+            float: left;
+        }
+        .thumbcontainer div {
+            width: 100%;
+            padding: 0.1em;
+        }
+        .thumbcontainer img {
+            width: 100%;
+        }
+        .thumbcontainer div div{
+            text-align: center;
+        }
+        .container {
+            width: 75%;
+            float: left;
+            padding: 0.5em;
+        }
+        .container img {
+            width: 100%;
+        }
+        #name, #counter {
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+<div id="thumbs" class="thumbcontainer">
+</div>
+<div id="container" class="container">
+    <h2 id="name"></h2>
+    <img id="cat-pic">
+    <h2 id="counter"></h2>
+</div>
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="cat.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
