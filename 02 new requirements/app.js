@@ -1,21 +1,23 @@
 $(document).ready(function() {
-    var count1 = 0, count2 = 0;
+
+    var count = [0, 0];
     var names = ['Twinkle', 'Mopsy'];
+
+    // display names
     names.forEach(function(name, index) {
         $('#name-' + (index + 1))[0].innerHTML = name;
     })
 
+    // display count
     function displayCount(element, count) {
         element.innerHTML = count;
     }
 
-    $('#cat-pic-1').click(function() {
-        count1++;
-        displayCount($('#counter-1')[0], count1);
-    });
-
-    $('#cat-pic-2').click(function() {
-        count2++;
-        displayCount($('#counter-2')[0], count2);
+    // add event handlers
+    $('.cat-pic').each(function(index, element) {
+        $(element).click(function() {
+            count[index]++;
+            displayCount($('.counter')[index], count[index]);
+        });
     });
 });
