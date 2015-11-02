@@ -93,6 +93,6 @@ $(document).ready(function() {
         }
     };
 
-    octopus.init()
+    octopus.init();
 
 });
