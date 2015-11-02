@@ -10,7 +10,7 @@ $(document).ready(function() {
 
         cats: [],
 
-        selectedIndex: 0,
+        selectedCat: null,
 
         init: function() {
             this.cats = [
@@ -30,7 +30,13 @@ $(document).ready(function() {
 
     var listView = {
         init: function() {
-            var listContainer = $('#list')[0];
+            this.listContainer = $('#list')[0];
+            this.render();
+        },
+
+        render: function() {
+            // clear list
+            this.listContainer.innerHTML = '';
 
             // generate & display list
             octopus.getCats().forEach(function(cat, index) {
@@ -43,16 +49,14 @@ $(document).ready(function() {
                 $name.text(cat.name);
                 $div.append($name);
 
-                $div.click((function(cat, idx){
+                $div.click((function(cat){
                     return function() {
-                        octopus.setSelectedIndex(idx);
-                        $('#name').text(cat.name);
-                        $('#cat-pic').attr('src', cat.url);
-                        $('#counter').text(cat.count);
+                        octopus.setSelectedCat(cat);
+                        catView.render();
                     };
-                })(cat, index));
+                })(cat));
 
-                $(listContainer).append($div);
+                $(listView.listContainer).append($div);
             });
         }
     };
@@ -62,6 +66,17 @@ $(document).ready(function() {
             element.innerHTML = count;
         },
 
+        render: function() {
+            var cat = octopus.getSelectedCat();
+            if(cat) {
+                $('#name').text(cat.name);
+                $('#cat-pic').attr('src', cat.url);
+                $('#counter').text(cat.count);
+            } else {
+                $('#name').text('Please select a cat.');
+            }
+        },
+
         init: function() {
             // add click event handler
             $('#cat-pic').click(function() {
@@ -69,6 +84,8 @@ $(document).ready(function() {
                 cat.count++;
                 catView.displayCount($('#counter')[0], cat.count);
             });
+
+            this.render();
         }
     };
 
@@ -79,11 +96,11 @@ $(document).ready(function() {
         },
 
         getSelectedCat: function() {
-            return this.getCats()[model.selectedIndex];
+            return model.selectedCat;
         },
 
-        setSelectedIndex: function(index) {
-            model.selectedIndex = index;
+        setSelectedCat: function(cat) {
+            model.selectedCat = cat;
         },
 
         init: function() {
