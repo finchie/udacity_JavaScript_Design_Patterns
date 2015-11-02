@@ -1,0 +1,29 @@
+
+body {
+    font-family: Arial, sans-serif;
+}
+.list-container {
+    width: 10%;
+    float: left;
+}
+.list-container div {
+    width: 100%;
+    padding: 0.1em;
+}
+.list-container img {
+    width: 100%;
+}
+.list-container div div{
+    text-align: center;
+}
+.container {
+    width: 75%;
+    float: left;
+    padding: 0.5em;
+}
+.container img {
+    width: 100%;
+}
+#name, #counter {
+    text-align: center;
+}
