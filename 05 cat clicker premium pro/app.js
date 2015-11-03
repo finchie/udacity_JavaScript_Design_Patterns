@@ -63,8 +63,8 @@ $(document).ready(function() {
     };
 
     var catView = {
-        displayCount: function (count) {
-            this.$counter.text(count);
+        updateCount: function () {
+            this.$counter.text(octopus.getSelectedCat().count);
         },
 
         render: function() {
@@ -88,10 +88,7 @@ $(document).ready(function() {
 
             // add image click event handler
             this.$image.click(function() {
-                var cat = octopus.getSelectedCat();
-                cat.count++;
-                catView.displayCount(cat.count);
-                adminView.updateCount();
+                octopus.incrementCount();
             });
 
             // add button click event handler
@@ -109,6 +106,20 @@ $(document).ready(function() {
             this.$adminName = $('#admin-name');
             this.$adminURL = $('#admin-URL');
             this.$adminCount = $('#admin-count');
+            // handle cancel click
+            $('#cancel-button').click(function(e) {
+                adminView.hide();
+                e.preventDefault();
+            });
+            // handle save click
+            $('#save-button').click(function(e) {
+                octopus.updateCat(
+                    adminView.$adminName.val(),
+                    adminView.$adminURL.val(),
+                    adminView.$adminCount.val()
+                );
+                e.preventDefault();
+            });
         },
         render: function() {
             var cat = octopus.getSelectedCat();
@@ -142,6 +153,28 @@ $(document).ready(function() {
 
         setSelectedCat: function(cat) {
             model.selectedCat = cat;
+        },
+
+        incrementCount: function() {
+            model.selectedCat.count++;
+            catView.updateCount();
+            adminView.updateCount();
+        },
+
+        updateCat: function (name, url, count) {
+            // update model
+            var cat = model.selectedCat;
+            cat.name = name;
+            cat.url = url;
+            try {
+                cat.count = parseInt(count);
+            } catch (e) {
+                console.error(count + ' is not a valid number');
+            }
+            // update views
+            adminView.hide();
+            listView.render();
+            catView.render();
         },
 
         init: function() {

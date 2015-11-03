@@ -48,3 +48,9 @@ body {
     float: right;
     margin-top: 0.4em;
 }
+#admin-form button {
+    width: 6em;
+    float: right;
+    margin-top: 0.4em;
+    margin-left: 0.4em;
+}
